@@ -1,0 +1,18 @@
+# Release and work directories
+__pycache__*
+__work*
+
+# Visual Studio related files, e.g., ".vscode"
+.vs*
+
+# Dataset files
+data_cache
+*.csv
+*.npy
+*.npz
+
+# Results at repo root
+vtune_results
+/*.json
+/*.xlsx
+/*.ipynb
