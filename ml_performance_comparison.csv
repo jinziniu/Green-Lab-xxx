@@ -11,6 +11,6 @@ No.,Algorithm,Machine Learning Library,Time,Accuracy (%),Energy Consumption (Jou
 10,DBSCAN,sklearnX,0.0149,,,,,
 11,Random Forest,scikit-learn,0.0751,,1.502,,,
 12,Random Forest,sklearnX,0.1383,,,,,
-13,Gradient Boosting Classifier,sklearnX,,,,,,
+13,Gradient Boosting Classifier,sklearnX,0.0811,,,,,
 14,Gradient Boosting Regressor,sklearnX,0.0702,,,,,
 
