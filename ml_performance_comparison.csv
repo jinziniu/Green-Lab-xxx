@@ -1,6 +1,6 @@
 No.,Algorithm,Machine Learning Library,Time,Accuracy,Energy Consumption (Joules),CPU Usage,Memory Usage (MB),Energy Efficiency Ratio (EER)
-1,K-Means,scikit-learn,0.1253,0.2181,2.506,0.0175,1.12,0.087
-2,K-Means,sklearnX,0.0939,0.2181,1.878,0.0175,1.12,2.32
+1,K-Means,scikit-learn,Silhouette Score 0.1253,0.2181,2.506,0.0175,1.12,0.087
+2,K-Means,sklearnX,0.0939,Silhouette Score 0.2181,1.878,0.0175,1.12,2.32
 3,Support Vector Machine (SVM),scikit-learn,0.006,0.7489,0.12,0.0015,0.57,6.24
 4,Support Vector Machine (SVM),sklearnX,0.0052,0.7489,0.104,0.0025,0.57,7.20
 5,Linear Regression,scikit-learn,0.1166,0.9079,1.51,0.006,0.34,0.60
