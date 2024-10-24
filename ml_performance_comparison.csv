@@ -1,14 +1,14 @@
 No.,Algorithm,Machine Learning Library,Time,Accuracy,Energy Consumption (Joules),CPU Usage,Memory Usage (MB),Energy Efficiency Ratio (EER)
-1,K-Means,scikit-learn, 0.1253,Silhouette 0.2181,1.56625e-2,0.0175,1.12,13.924980047885075
-2,K-Means,sklearnX,0.0939,Silhouette 0.2181,1.945e-3,0.0175,1.12,13.924980047885075
-3,Support Vector Machine (SVM),scikit-learn,0.006,0.7489,6.4285e-5,0.0015,0.57,11649.684996499962
-4,Support Vector Machine (SVM),sklearnX,0.0052,0.7489,9.2857e-5,0.0025,0.57,8065.089330906663
-5,Linear Regression,scikit-learn,0.1166,0.9079,3.2357e-3,0.006,0.34,280.5884352690299
-6,Linear Regression,sklearnX,0.1383,0.7576,1.9575e-3,0.008,1.63,387.02426564495534
-7,Logistic Regression,scikit-learn,0.006,0.9079,2.7857e-4,0.0065,0.32,3259.144918691891
-8,Logistic Regression,sklearnX,0.0026,0.9079,8.357e-5,0.0045,0.31,10863.946392246022
+1,K-Means,scikit-learn, 0.1253,Silhouette 0.2181,1.56625e-2,0.0175,1.12,
+2,K-Means,sklearnX,0.0939,Silhouette 0.2181,1.945e-3,0.0175,1.12,
+3,Support Vector Machine (SVM),scikit-learn,0.006,0.7489,6.4285e-5,0.0015,0.57,
+4,Support Vector Machine (SVM),sklearnX,0.0052,0.7489,9.2857e-5,0.0025,0.57,
+5,Linear Regression,scikit-learn,0.1166,0.9079,3.2357e-3,0.006,0.34,
+6,Linear Regression,sklearnX,0.1383,0.7576,1.9575e-3,0.008,1.63,
+7,Logistic Regression,scikit-learn,0.006,0.9079,2.7857e-4,0.0065,0.32,
+8,Logistic Regression,sklearnX,0.0026,0.9079,8.357e-5,0.0045,0.31,
 9,DBSCAN,scikit-learn,0.0161,Silhouette: -0.1155,9.775e-4,0.0085,0.55,
 10,DBSCAN,sklearnX,0.0149,Silhouette: -0.1155,7.45e-4,0.007,0.66,
-11,Random Forest,scikit-learn,0.0751,0.7576,1.9092e-3,0.003,1.64,396.81542007123403
-12,Random Forest,sklearnX,0.1383,0.7576,2.6964e-3,0.005,1.31,280.967215546654
+11,Random Forest,scikit-learn,0.0751,0.7576,1.9092e-3,0.003,1.64,
+12,Random Forest,sklearnX,0.1383,0.7576,2.6964e-3,0.005,1.31,
 
