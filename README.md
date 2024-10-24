@@ -22,7 +22,6 @@ This project evaluates the following ML frameworks and algorithms:
 - **Frameworks**:
   - Scikit-learn
   - Sklearnex
-  - XGBoost
 
 - **Algorithms**:
   - K-Means
