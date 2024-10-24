@@ -3,7 +3,7 @@ No.,Algorithm,Machine Learning Library,Time,Accuracy,Energy Consumption (Joules)
 2,K-Means,sklearnX,0.0939,Silhouette 0.2181,0.1945,0.175,1.12,
 3,Support Vector Machine (SVM),scikit-learn,0.006,0.7489,6.4285e-3,0.15,0.57,
 4,Support Vector Machine (SVM),sklearnX,0.0052,0.7489,9.2857e-3,0.25,0.57,
-5,Linear Regression,scikit-learn,0.1166,0.9079,0.32357e,0.6,0.34,
+5,Linear Regression,scikit-learn,0.1166,0.9079,0.32357,0.6,0.34,
 6,Linear Regression,sklearnX,0.1383,0.7576,0.19575,0.8,1.63,
 7,Logistic Regression,scikit-learn,0.006,0.9079,0.027857,0.65,0.32,
 8,Logistic Regression,sklearnX,0.0026,0.9079,8.357e-3,0.45,0.31,
