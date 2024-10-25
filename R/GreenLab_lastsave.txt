@@ -1,0 +1,154 @@
+
+R version 4.4.1 (2024-06-14 ucrt) -- "Race for Your Life"
+Copyright (C) 2024 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64
+
+R是自由软件，不附带任何担保。
+在某些条件下你可以将其自由分发。
+用'license()'或'licence()'来看分发的详细条件。
+
+R是个合作计划，有许多人为之做出了贡献.
+用'contributors()'来看合著者的详细情况
+用'citation()'会告诉你如何在出版物中正确地引用R或R程序包。
+
+用'demo()'来看一些示例程序，用'help()'来阅读在线帮助文件，或
+用'help.start()'通过HTML浏览器来看帮助文件。
+输入'q()'退出R.
+
+[原来保存的工作空间已还原]
+
+> setwd("D:/Master/P1 GreenLab")
+> title<-read.table("GreenLab_SKX.txt",header=TRUE,sep="\t")
+> mean(time)
+[1] NA
+警告信息:
+In mean.default(time) : 参数不是数值也不是逻辑值：返回NA
+> title
+          Algorithms         Dataset   Time   Energy
+1             Kmeans          WineQT 0.0939 0.194507
+2             DBSCAN          WineQT 0.0149 0.074500
+3                SVM IndiansDiabetes 0.0052 0.009286
+4       RandomForest IndiansDiabetes 0.0755 0.269643
+5   LinearRegression   Bostonhousing 0.0783 0.195750
+6 LogisticRegression   Bostonhousing 0.0026 0.008357
+> df<-read.table("GreenLab_SKX.txt",header=TRUE,sep="\t")
+> mean_energy<-mean(df$Energy,na.rm=TRUE)
+> mean_energy
+[1] 0.1253405
+> var_energy<-var(df$Energy,na.rm=TRUE)
+> var_energy
+[1] 0.01206065
+> stdev_energy<-stdev(df$Energy,na.rm=TRUE)
+错误于stdev(df$Energy, na.rm = TRUE): 没有"stdev"这个函数
+> stdev_energy<-sd(df$Energy,na.rm=TRUE)
+> stdev_energy
+[1] 0.109821
+> median_energy<-median(df$Energy,na.rm=TRUE)
+> median_energy
+[1] 0.1345035
+> install.packages("e1071")
+将程序包安装入‘C:/Users/wayne/AppData/Local/R/win-library/4.4’
+(因为‘lib’没有被指定)
+--- 请选择此会话所使用的 CRAN 镜像源 ---
+试开URL’https://mirror.lyrahosting.com/CRAN/bin/windows/contrib/4.4/e1071_1.7-16.zip'
+Content type 'application/zip' length 671879 bytes (656 KB)
+downloaded 656 KB
+
+程序包‘e1071’打开成功，MD5和检查也通过
+
+下载的二进制程序包在
+        C:\Users\wayne\AppData\Local\Temp\Rtmp65w6RI\downloaded_packages里
+> install.packages("e1071")
+将程序包安装入‘C:/Users/wayne/AppData/Local/R/win-library/4.4’
+(因为‘lib’没有被指定)
+试开URL’https://mirror.lyrahosting.com/CRAN/bin/windows/contrib/4.4/e1071_1.7-16.zip'
+Content type 'application/zip' length 671879 bytes (656 KB)
+downloaded 656 KB
+
+程序包‘e1071’打开成功，MD5和检查也通过
+
+下载的二进制程序包在
+        C:\Users\wayne\AppData\Local\Temp\Rtmp65w6RI\downloaded_packages里
+> library(e1071)
+> skewness(df$Energy)
+[1] 0.0489924
+> kurtosis(df$Energy)
+[1] -2.018697
+> IQR(df$Energy)
+[1] 0.1698498
+> quantile(df$Energy)
+       0%       25%       50%       75%      100% 
+0.0083570 0.0255895 0.1345035 0.1954393 0.2696430 
+> mean(df$Time)
+[1] 0.04506667
+> median(df$Time)
+[1] 0.0452
+> sd(df$Time)
+[1] 0.04175676
+> df<-read.table("GreenLab_SKL.txt",header=TRUE,sep="\t")
+错误于scan(file = file, what = what, sep = sep, quote = quote, dec = dec, : 
+  line 1 did not have 2 elements
+> df<-read.table("GreenLab_SKL.txt",header=TRUE,sep="\t")
+> title
+          Algorithms         Dataset   Time   Energy
+1             Kmeans          WineQT 0.0939 0.194507
+2             DBSCAN          WineQT 0.0149 0.074500
+3                SVM IndiansDiabetes 0.0052 0.009286
+4       RandomForest IndiansDiabetes 0.0755 0.269643
+5   LinearRegression   Bostonhousing 0.0783 0.195750
+6 LogisticRegression   Bostonhousing 0.0026 0.008357
+>  title<-read.table("GreenLab_SKX.txt",header=TRUE,sep="\t")
+>  title<-read.table("GreenLab_SKL.txt",header=TRUE,sep="\t")
+> title
+          Algorithms         Dataset   Time   Energy
+1             Kmeans          WineQT 0.1253 0.156630
+2             DBSCAN          WineQT 0.0161 0.097750
+3                SVM IndiansDiabetes 0.0060 0.006429
+4       RandomForest IndiansDiabetes 0.0891 0.190929
+5   LinearRegression   Bostonhousing 0.0755 0.323571
+6 LogisticRegression   Bostonhousing 0.0060 0.027857
+>  title<-read.table("GreenLab_SKL.txt",header=TRUE,sep="\t")
+> title
+          Algorithms         Dataset   Time   Energy
+1             Kmeans          WineQT 0.1253 0.156625
+2             DBSCAN          WineQT 0.0161 0.097750
+3                SVM IndiansDiabetes 0.0060 0.006429
+4       RandomForest IndiansDiabetes 0.0891 0.190929
+5   LinearRegression   Bostonhousing 0.0755 0.323571
+6 LogisticRegression   Bostonhousing 0.0060 0.027857
+> df<-read.table("GreenLab_SKX.txt",header=TRUE,sep="\t")
+> mean_energy<-mean(df$Energy,na.rm=TRUE)
+> mean_energy
+[1] 0.1253405
+> var_energy<-var(df$Energy,na.rm=TRUE)
+> > var_energy
+错误: 意外的'>'在">"里
+> var_energy<-var(df$Energy,na.rm=TRUE)
+> var_energy
+[1] 0.01206065
+> stdev_energy<-sd(df$Energy,na.rm=TRUE)
+> stdev_energy
+[1] 0.109821
+> df<-read.table("GreenLab_SKL.txt",header=TRUE,sep="\t")
+> mean_energy<-mean(df$Energy,na.rm=TRUE)
+> mean_energy
+[1] 0.1338602
+> var_energy<-var(df$Energy,na.rm=TRUE)
+> var_energy
+[1] 0.01370892
+>  median_energy<-median(df$Energy,na.rm=TRUE)
+>  median_energy
+[1] 0.1271875
+> skewness(df$Energy)
+[1] 0.3860449
+> kurtosis(df$Energy)
+[1] -1.494308
+> IQR(df$Energy)
+[1] 0.1370227
+> quantile(df$Energy)
+        0%        25%        50%        75%       100% 
+0.00642900 0.04533025 0.12718750 0.18235300 0.32357100 
+> summary(df$Energy)
+    Min.  1st Qu.   Median     Mean  3rd Qu.     Max. 
+0.006429 0.045330 0.127188 0.133860 0.182353 0.323571 
+> 
