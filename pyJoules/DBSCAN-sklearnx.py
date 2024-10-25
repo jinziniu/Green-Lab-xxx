@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import silhouette_score
 import time
 import psutil  # Import psutil for CPU and memory usage tracking
-from pyJoules.energy_meter import measure_energy
+from pyJoules.energy_meter import EnergyContext
 from pyJoules.device.rapl_device import RaplPackageDomain, RaplCoreDomain
 
 # 使用 sklearnex 的加速
@@ -28,21 +28,18 @@ X_scaled = scaler.fit_transform(X)
 dbscan = DBSCAN(eps=0.5, min_samples=5)  # 你可以根据数据特性调整 eps 和 min_samples 参数
 
 # 记录 CPU 和内存使用率及训练的开始时间
-start_cpu_percent = psutil.cpu_percent(interval=1)  # 使用 1 秒的时间间隔稳定 CPU 使用率的计算
+start_cpu_percent = psutil.cpu_percent(interval=None)  # 使用 1 秒的时间间隔稳定 CPU 使用率的计算
 start_memory_usage = process.memory_info().rss / (1024 ** 2)  # 记录初始内存使用情况（单位：MB）
 start_time = time.time()  # 记录开始时间
 
-# 使用 pyJoules 来测量能耗
-@measure_energy(domains=[RaplPackageDomain(0), RaplCoreDomain(0)])
-def run_dbscan():
+# 使用 pyJoules 来测量能耗，通过 EnergyContext 手动控制测量
+with EnergyContext(domains=[RaplPackageDomain(0), RaplCoreDomain(0)], start_tag='start') as ctx:
     dbscan.fit(X_scaled)
-
-# 执行 DBSCAN 并测量能耗
-energy_measurement = run_dbscan()
+    ctx.record(tag='DBSCAN_completed')  # 手动记录能耗数据
 
 # 记录结束时间、CPU 使用率和内存使用率
 end_time = time.time()
-end_cpu_percent = psutil.cpu_percent(interval=1)  # 使用相同时间间隔稳定 CPU 使用率的计算
+end_cpu_percent = psutil.cpu_percent(interval=None)  # 使用相同时间间隔稳定 CPU 使用率的计算
 end_memory_usage = process.memory_info().rss / (1024 ** 2)  # 记录最终内存使用情况（单位：MB）
 
 # 计算运行时间
@@ -70,6 +67,4 @@ print(f"Execution Time (scikit-learnex, DBSCAN): {execution_time:.4f} seconds")
 print(f"Average CPU Usage during Execution: {cpu_usage:.2f}%")
 print(f"Memory Usage Change: {memory_usage_diff:.2f} MB")
 
-# 输出能耗测量结果
-for domain in energy_measurement:
-    print(f"Energy consumption for {domain.name}: {domain.energy:.2f} Joules")
+

@@ -4,8 +4,8 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import silhouette_score
 import time
 import psutil  # Import psutil for CPU and memory usage tracking
-from pyJoules.energy_meter import measure_energy
-from pyJoules.device.rapl_device import RaplPackageDomain, RaplCoreDomain
+from pyJoules.energy_meter import EnergyContext
+from pyJoules.device.rapl_device import RaplPackageDomain
 
 # Get current process object to track memory usage
 process = psutil.Process()
@@ -28,13 +28,11 @@ start_cpu_percent = psutil.cpu_percent(interval=None)  # Record initial system-w
 start_memory_usage = process.memory_info().rss / (1024 ** 2)  # Record initial memory usage in MB
 start_time = time.time()  # Record start time
 
-@measure_energy(domains=[RaplPackageDomain(0), RaplCoreDomain(0)])
-def run_dbscan():
+# 使用 EnergyContext 来测量能耗并运行 DBSCAN
+with EnergyContext(domains=[RaplPackageDomain(0)], start_tag='run_dbscan') as ctx:
     # Train DBSCAN model
     dbscan.fit(X_scaled)
-
-# Run DBSCAN model wrapped with energy measurement
-energy_measurement = run_dbscan()
+    ctx.record(tag='DBSCAN_completed')
 
 # Record end time, CPU usage, and memory usage
 end_time = time.time()
@@ -65,8 +63,3 @@ else:
 print(f"Execution Time: {execution_time:.4f} seconds")
 print(f"Average CPU Usage during Execution: {cpu_usage_avg:.2f}%")
 print(f"Memory Usage Change: {memory_usage_diff:.2f} MB")
-
-# Output only the energy consumption for the core domain
-for domain in energy_measurement:
-    if "core" in domain.name:  # Filter for the core domain
-        print(f"Energy consumption for core domain: {domain.energy:.2f} Joules")

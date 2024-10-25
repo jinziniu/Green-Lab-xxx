@@ -7,7 +7,7 @@ from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler
 import time
 import psutil  # Import psutil for CPU and memory usage tracking
-from pyJoules.energy_meter import measure_energy
+from pyJoules.energy_meter import EnergyContext
 from pyJoules.device.rapl_device import RaplPackageDomain, RaplCoreDomain
 
 # 使用 sklearnex 的加速
@@ -37,19 +37,15 @@ X_train, X_test, y_train, y_test = train_test_split(X_scaled, y, test_size=0.3, 
 # Gradient Boosting Classifier 实例化
 model = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3, random_state=42)
 
-# 使用 pyJoules 来测量能耗
-@measure_energy(domains=[RaplPackageDomain(0), RaplCoreDomain(0)])
-def run_training():
-    # 训练模型
-    model.fit(X_train, y_train)
-
 # 记录 CPU 和内存使用率及训练的开始时间
 start_time = time.time()  # 记录开始时间
 start_cpu_percent = psutil.cpu_percent(interval=None)  # 捕获训练前的 CPU 使用率
 start_memory_usage = process.memory_info().rss / (1024 ** 2)  # 记录初始内存使用情况（MB）
 
-# 执行模型训练并测量能耗
-energy_measurement = run_training()
+# 使用 EnergyContext 来测量能耗并执行模型训练
+with EnergyContext(domains=[RaplPackageDomain(0), RaplCoreDomain(0)], start_tag='start') as ctx:
+    model.fit(X_train, y_train)
+    ctx.record(tag='Training_completed')  # 手动记录训练结束的能耗
 
 # 模型预测
 y_pred = model.predict(X_test)
@@ -62,8 +58,8 @@ end_memory_usage = process.memory_info().rss / (1024 ** 2)  # 记录最终内存
 # 计算运行时间
 execution_time = end_time - start_time
 
-# 计算 CPU 使用率变化（整个过程的系统 CPU 变化）
-cpu_usage_during_execution = end_cpu_percent - start_cpu_percent
+# 计算 CPU 使用率变化
+cpu_usage_avg = (start_cpu_percent + end_cpu_percent) / 2  # 取平均 CPU 使用率
 
 # 计算内存使用变化
 memory_usage_diff = end_memory_usage - start_memory_usage
@@ -74,12 +70,8 @@ report = classification_report(y_test, y_pred)
 
 # 输出运行时间、CPU 和内存使用情况
 print(f"Execution Time (sklearnex, Gradient Boosting): {execution_time:.4f} seconds")
-print(f"CPU Usage during Execution: {cpu_usage_during_execution:.2f}%")
+print(f"Average CPU Usage during Execution: {cpu_usage_avg:.2f}%")
 print(f"Memory Usage Change: {memory_usage_diff:.2f} MB")
 print(f"Accuracy: {accuracy:.4f}")
 print(f"Classification Report:\n{report}")
-
-# 输出能耗测量结果
-for domain in energy_measurement:
-    print(f"Energy consumption for {domain.name}: {domain.energy:.2f} Joules")
 
