@@ -96,7 +96,6 @@ We plan to extend the project by experimenting with more complex ML models and e
 
 ## Contributors
 
-- WenZhi Zhang
 - Hongyu Chen
 - Ziniu Jin
 - Weinuo Huang
